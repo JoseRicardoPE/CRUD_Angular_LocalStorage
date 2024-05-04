@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +6,19 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'crud_localStorage_app';
+  
+  @ViewChild('modalNewStudent') modal!: ElementRef;
+
+  openModal() {
+    const modal = document.getElementById('modalNewStudent');
+    if (modal !== null) {
+      modal.style.display = 'block';
+    }
+  }
+
+  closeModal() {
+    if (this.modal !== null) {
+      this.modal.nativeElement.style.display = 'none';
+    }
+  }
 }
