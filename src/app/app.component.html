@@ -1,5 +1,5 @@
 <div class="container">
-    <div class="row pt-3">
+    <div class="row py-3">
         <div class="col-6">
             <h4>Student Portal</h4>    
         </div>
@@ -8,23 +8,25 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-3">
-            <div class="card">
-                <div class="card-header">
-                    <div class="row">
-                        <div class="col-6">Student Name</div>
-                        <div class="col-6 text-end">Phohe No</div>
+        <ng-container *ngFor="let student of studentList">
+            <div class="col-3 mb-3">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col-6">{{ student.name }}</div>
+                            <div class="col-6 text-end">{{ student.phoneNo }}</div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <p>{{ student.city }}, {{ student.state }}, {{ student.pincode }}</p>
+                        <p>{{ student.address }}</p>
+                    </div>
+                    <div class="card-footer text-center">
+                        <p>{{ student.email }}</p>
                     </div>
                 </div>
-                <div class="card-body">
-                    <p>City, state, pincode</p>
-                    <p>Address</p>
-                </div>
-                <div class="card-footer text-center">
-                    <p>Email</p>
-                </div>
             </div>
-        </div>
+        </ng-container>
     </div>
 </div>
 
