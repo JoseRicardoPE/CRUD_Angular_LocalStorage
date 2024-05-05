@@ -26,6 +26,17 @@ export class AppComponent {
   }
 
   saveStudent() {
+    debugger;
+    const isLocalPresent = localStorage.getItem('angularCrud');
     
+    if (isLocalPresent !== null) {
+      const oldArr = JSON.parse(isLocalPresent);
+      oldArr.push(this.studentObj);
+      localStorage.setItem('angular17crud', JSON.stringify(oldArr));
+    } else {
+      const newArr = [];
+      newArr.push(this.studentObj);
+      localStorage.setItem('angular17crud', JSON.stringify(newArr));
+    }
   }
 }
