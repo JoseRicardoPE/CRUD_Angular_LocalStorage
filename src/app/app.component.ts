@@ -1,4 +1,5 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Student } from './model/student/student';
 
 @Component({
   selector: 'app-root',
@@ -8,6 +9,8 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 export class AppComponent {
   
   @ViewChild('modalNewStudent') modal!: ElementRef;
+
+  studentObj: Student = new Student();
 
   openModal() {
     const modal = document.getElementById('modalNewStudent');
@@ -20,5 +23,9 @@ export class AppComponent {
     if (this.modal !== null) {
       this.modal.nativeElement.style.display = 'none';
     }
+  }
+
+  saveStudent() {
+    
   }
 }
