@@ -11,7 +11,6 @@ export class AppComponent implements OnInit {
   @ViewChild('modalNewStudent') modal!: ElementRef;
   studentObj: Student = new Student();
   studentList: Student[] = [];
-
   
   ngOnInit(): void {
     const localData = localStorage.getItem('angularCrud');
@@ -21,17 +20,22 @@ export class AppComponent implements OnInit {
   }
 
   openModal() {
-    this.studentObj = new Student();
     const modal = document.getElementById('modalNewStudent');
     if (modal !== null) {
       modal.style.display = 'block';
     }
   }
-
+  
   closeModal() {
+    this.studentObj = new Student();
     if (this.modal !== null) {
       this.modal.nativeElement.style.display = 'none';
     }
+  }
+
+  editStudent(item: Student) {
+    this.studentObj = item;
+    this.openModal();
   }
 
   saveStudent() {
@@ -40,12 +44,14 @@ export class AppComponent implements OnInit {
 
     if (isLocalPresent !== null) {
       const oldArr = JSON.parse(isLocalPresent);
+      this.studentObj.id = oldArr.length + 1;
       oldArr.push(this.studentObj);
       this.studentList = oldArr;
       localStorage.setItem('angularCrud', JSON.stringify(oldArr));
     } else {
       const newArr = [];
       newArr.push(this.studentObj);
+      this.studentObj.id = 1;
       this.studentList = newArr;
       localStorage.setItem('angularCrud', JSON.stringify(newArr));
     }

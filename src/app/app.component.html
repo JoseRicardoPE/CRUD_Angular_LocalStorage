@@ -7,27 +7,43 @@
             <button class="btn btn-outline-success" (click)="openModal()">Add New</button>
         </div>
     </div>
-    <div class="row">
-        <ng-container *ngFor="let student of studentList">
-            <div class="col-3 mb-3">
-                <div class="card">
-                    <div class="card-header">
-                        <div class="row">
-                            <div class="col-6">{{ student.name }}</div>
-                            <div class="col-6 text-end">{{ student.phoneNo }}</div>
+    <ng-container *ngIf="studentList.length !== 0; else template">
+        <div class="row">
+            <ng-container *ngFor="let student of studentList">
+                <div class="col-3 mb-3">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="row">
+                                <div class="col-6">{{ student.name }}</div>
+                                <div class="col-6 text-end">{{ student.phoneNo }}</div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <p>{{ student.city }}, {{ student.state }}, {{ student.pincode }}</p>
+                            <p>{{ student.address }}</p>
+                        </div>
+                        <div class="card-footer text-center">
+                            <div class="row">
+                                <div class="col-8 ps-0">
+                                    <span>{{ student.email }}</span>
+                                </div>
+                                <div class="col-4 pe-0">
+                                    <button class="btn btn-primary btn-sm" (click)="editStudent(student)">Edit</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="card-body">
-                        <p>{{ student.city }}, {{ student.state }}, {{ student.pincode }}</p>
-                        <p>{{ student.address }}</p>
-                    </div>
-                    <div class="card-footer text-center">
-                        <p>{{ student.email }}</p>
-                    </div>
                 </div>
+            </ng-container>
+        </div>
+    </ng-container>
+    <ng-template #template>
+        <div class="row">
+            <div class="col-12 p-4  text-center ">
+                <p>¡No record found. Create new record!</p>
             </div>
-        </ng-container>
-    </div>
+        </div>
+    </ng-template>
 </div>
 
 <div class="modal" tabindex="-1" id="modalNewStudent" #modalNewStudent>
