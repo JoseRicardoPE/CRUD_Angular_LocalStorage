@@ -33,11 +33,6 @@ export class AppComponent implements OnInit {
     }
   }
 
-  editStudent(item: Student) {
-    this.studentObj = item;
-    this.openModal();
-  }
-
   saveStudent() {
     debugger;
     const isLocalPresent = localStorage.getItem('angularCrud');
@@ -56,5 +51,35 @@ export class AppComponent implements OnInit {
       localStorage.setItem('angularCrud', JSON.stringify(newArr));
     }
     this.closeModal();
+  }
+
+  editStudent(item: Student) {
+    this.studentObj = item;
+    this.openModal();
+  }
+
+  updateStudent() {
+    const currentRecord = this.studentList.find(data => data.id === this.studentObj.id);
+    if (currentRecord !== undefined) {
+      currentRecord.name = this.studentObj.name;
+      currentRecord.phoneNo = this.studentObj.phoneNo;
+      currentRecord.email = this.studentObj.email;
+      currentRecord.city = this.studentObj.city;
+      currentRecord.state = this.studentObj.state;
+      currentRecord.pincode = this.studentObj.pincode;
+      currentRecord.address = this.studentObj.address;
+    };
+    localStorage.setItem('angularCrud', JSON.stringify(this.studentList));
+    this.closeModal();
+  }
+
+  deleteStudent(item: Student) {
+    const isDelete = confirm('Are you sure you want to delete');
+    if (isDelete) {
+      const currentRecord = this.studentList.findIndex(data => data.id === this.studentObj.id);
+      this.studentList.splice(currentRecord, 1);
+      localStorage.setItem('angularCrud', JSON.stringify(this.studentList));
+      this.closeModal();
+    }
   }
 }

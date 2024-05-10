@@ -23,12 +23,13 @@
                             <p>{{ student.address }}</p>
                         </div>
                         <div class="card-footer text-center">
-                            <div class="row">
-                                <div class="col-8 ps-0">
+                            <div class="row d-flex flex-column ">
+                                <div class="col-8 px-3 w-100 mb-2">
                                     <span>{{ student.email }}</span>
                                 </div>
-                                <div class="col-4 pe-0">
+                                <div class="col-4 d-flex justify-content-between w-100 px-3 ">
                                     <button class="btn btn-primary btn-sm" (click)="editStudent(student)">Edit</button>
+                                    <button class="btn btn-danger  btn-sm" (click)="deleteStudent(student)">Delete</button>
                                 </div>
                             </div>
                         </div>
@@ -93,8 +94,13 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger " (click)="closeModal()">Close</button>
-                <button type="button" class="btn btn-primary" (click)="saveStudent()">Save Student</button>
+                <ng-container *ngIf="studentObj.id >= 1; else modifyStudent">
+                    <button type="button" class="btn btn-success" (click)="updateStudent()">Update Student</button>
+                </ng-container>
+                <ng-template #modifyStudent>
+                    <button type="button" class="btn btn-primary" (click)="saveStudent()">Save Student</button>
+                </ng-template>
             </div>
         </div>
     </div>
-</div>
+<!-- </div> -->
